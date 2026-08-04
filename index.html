@@ -3,15 +3,31 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>El Camino del Elegido – Despierta Tu Poder Cósmico</title>
+<meta name="theme-color" content="#03040f">
+<title>El Camino del Elegido — Despierta tu poder y transforma tu destino</title>
+<meta name="description" content="Ebook para quienes sienten que tienen una misión sin activar. Descifra las señales, rompe tus bloqueos y construye tu legado. Descarga inmediata por 10,99€.">
+<link rel="canonical" href="">
+
+<!-- Open Graph / redes -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="El Camino del Elegido — Despierta tu poder cósmico">
+<meta property="og:description" content="No es un libro de autoayuda. Es un mapa estelar para tu alma. Descarga inmediata por 10,99€ (antes 19,99€).">
+<meta property="og:locale" content="es_ES">
+<meta name="twitter:card" content="summary_large_image">
+
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✦</text></svg>">
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Cinzel+Decorative:wght@400;700&family=Raleway:ital,wght@0,200;0,300;0,400;0,500;1,200;1,300&display=swap" rel="stylesheet">
 
 <!-- ============================================================
-  SECCIÓN 0 — ESTILOS GLOBALES (pegar UNA sola vez en Hotmart)
-  Añadir como bloque HTML personalizado al inicio de la página
+  ⚙️  PARA EDITAR RÁPIDO EN EL FUTURO
+  · Enlace de compra  → busca:  ENLACE-COMPRA   (5 apariciones)
+  · Precio de oferta  → busca:  10,99
+  · Precio tachado    → busca:  19,99
 ============================================================ -->
+
 <style>
 :root {
   --space:        #03040f;
@@ -21,16 +37,18 @@
   --gold-bright:  #f0c866;
   --gold-dim:     #8a6c2a;
   --teal:         #4ecdc4;
-  --teal-dim:     rgba(78,205,196,0.3);
-  --purple:       #9b59b6;
-  --purple-dim:   rgba(155,89,182,0.25);
+  --purple:       #c084e8;
+  --red:          #e63946;
   --white:        #f0eeff;
   --white-dim:    rgba(240,238,255,0.65);
   --white-faint:  rgba(240,238,255,0.3);
+
+  --maxw: 900px;
+  --sect-y: 7rem;
 }
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
 
 body {
   background: var(--space);
@@ -38,10 +56,30 @@ body {
   font-family: 'Raleway', sans-serif;
   font-weight: 300;
   overflow-x: hidden;
-  cursor: default;
+  line-height: 1.6;
+  padding-bottom: 4.5rem; /* espacio para la barra fija */
 }
 
-/* ---- STARS CANVAS ---- */
+::selection { background: rgba(212,168,67,0.3); color: #fff; }
+
+a:focus-visible, button:focus-visible {
+  outline: 2px solid var(--gold-bright);
+  outline-offset: 4px;
+}
+
+/* ---- BARRA DE PROGRESO DE LECTURA ---- */
+#progressBar {
+  position: fixed;
+  top: 0; left: 0;
+  height: 2px;
+  width: 0%;
+  background: linear-gradient(90deg, var(--gold), var(--teal));
+  z-index: 1000;
+  transition: width 0.1s linear;
+  box-shadow: 0 0 12px rgba(212,168,67,0.6);
+}
+
+/* ---- FONDO DE ESTRELLAS ---- */
 #starCanvas {
   position: fixed;
   top: 0; left: 0;
@@ -50,31 +88,27 @@ body {
   z-index: 0;
 }
 
-/* ---- NEBULA GLOW LAYERS ---- */
+/* ---- NEBULOSAS ---- */
 .nebula-bg {
   position: fixed;
-  top: 0; left: 0; right: 0; bottom: 0;
+  inset: 0;
   pointer-events: none;
   z-index: 0;
   overflow: hidden;
 }
-.nebula-bg::before {
+.nebula-bg::before, .nebula-bg::after {
   content: '';
   position: absolute;
-  top: -20%;
-  left: -20%;
-  width: 80vw;
-  height: 80vw;
+}
+.nebula-bg::before {
+  top: -20%; left: -20%;
+  width: 80vw; height: 80vw;
   background: radial-gradient(circle, rgba(80,30,140,0.18) 0%, transparent 65%);
   animation: nebulaDrift 25s ease-in-out infinite alternate;
 }
 .nebula-bg::after {
-  content: '';
-  position: absolute;
-  bottom: -10%;
-  right: -10%;
-  width: 70vw;
-  height: 70vw;
+  bottom: -10%; right: -10%;
+  width: 70vw; height: 70vw;
   background: radial-gradient(circle, rgba(20,90,140,0.15) 0%, transparent 65%);
   animation: nebulaDrift 30s ease-in-out infinite alternate-reverse;
 }
@@ -98,26 +132,16 @@ body {
   animation: nebulaDrift 35s ease-in-out infinite alternate-reverse;
 }
 
-@keyframes nebulaDrift {
-  0%   { transform: translate(0, 0) scale(1); }
-  100% { transform: translate(4vw, 3vh) scale(1.08); }
-}
-
-/* ---- GLOBAL WRAPPERS ---- */
+/* ---- ESTRUCTURA ---- */
 .cosmic-section {
   position: relative;
   z-index: 1;
-  padding: 7rem 2rem;
+  padding: var(--sect-y) 1.5rem;
 }
+.container { max-width: var(--maxw); margin: 0 auto; }
 
-.container {
-  max-width: 900px;
-  margin: 0 auto;
-}
-
-/* ---- TYPOGRAPHY ---- */
+/* ---- TIPOGRAFÍA ---- */
 .eyebrow {
-  font-family: 'Raleway', sans-serif;
   font-weight: 400;
   font-size: 0.65rem;
   letter-spacing: 0.5em;
@@ -126,22 +150,26 @@ body {
   display: block;
   text-align: center;
   margin-bottom: 1.2rem;
+  text-indent: 0.5em;
 }
 
-h1.cosmic-title {
-  font-family: 'Cinzel Decorative', serif;
-  font-weight: 400;
-  font-size: clamp(2.4rem, 7vw, 5.5rem);
-  line-height: 1.1;
-  text-align: center;
+.gold-text {
   background: linear-gradient(180deg, #ffffff 0%, var(--gold-bright) 60%, var(--gold) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  margin-bottom: 1.5rem;
-  text-shadow: none;
   filter: drop-shadow(0 0 40px rgba(212,168,67,0.3));
 }
+
+h1.cosmic-title, h2.dramatic-title {
+  font-family: 'Cinzel Decorative', serif;
+  font-weight: 400;
+  line-height: 1.1;
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+h1.cosmic-title { font-size: clamp(2.4rem, 7vw, 5.5rem); }
+h2.dramatic-title { font-size: clamp(2rem, 6vw, 4.5rem); }
 
 h2.section-heading {
   font-family: 'Cinzel', serif;
@@ -152,7 +180,6 @@ h2.section-heading {
   color: var(--white);
   margin-bottom: 1rem;
 }
-
 h2.section-heading em {
   font-style: italic;
   background: linear-gradient(90deg, var(--gold-bright), var(--teal));
@@ -179,10 +206,9 @@ h2.section-heading em {
   max-width: 680px;
   margin: 0 auto 1.5rem;
   line-height: 1.95;
-  font-weight: 300;
 }
 
-/* ---- DIVIDERS ---- */
+/* ---- SEPARADORES ---- */
 .star-divider {
   display: flex;
   align-items: center;
@@ -198,72 +224,305 @@ h2.section-heading em {
 }
 .star-divider span { color: var(--gold); font-size: 0.7rem; letter-spacing: 0.3em; }
 
-/* ---- CTA BUTTON ---- */
+/* ---- BOTÓN CTA ---- */
 .cta-btn {
   display: inline-block;
-  padding: 1.2rem 4rem;
-  background: linear-gradient(135deg, var(--gold) 0%, #b8882a 100%);
+  padding: 1.2rem 3rem;
+  background: linear-gradient(135deg, var(--gold-bright) 0%, var(--gold) 45%, #b8882a 100%);
   color: #080512;
   text-decoration: none;
   font-family: 'Cinzel', serif;
   font-weight: 600;
-  font-size: 0.75rem;
-  letter-spacing: 0.25em;
+  font-size: 0.78rem;
+  letter-spacing: 0.22em;
   text-transform: uppercase;
-  border-radius: 2px;
+  border-radius: 3px;
   position: relative;
   overflow: hidden;
-  transition: all 0.4s ease;
+  max-width: 100%;
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
   box-shadow: 0 0 30px rgba(212,168,67,0.4), 0 0 60px rgba(212,168,67,0.15);
+  animation: ctaBreathe 3.5s ease-in-out infinite;
 }
 .cta-btn::before {
   content: '';
   position: absolute;
-  top: 0; left: -100%;
+  top: 0; left: -120%;
   width: 100%; height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.25), transparent);
-  transition: left 0.5s ease;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.35), transparent);
+  transition: left 0.6s ease;
 }
-.cta-btn:hover { 
+.cta-btn:hover {
   transform: translateY(-3px) scale(1.02);
   box-shadow: 0 0 50px rgba(212,168,67,0.6), 0 0 100px rgba(212,168,67,0.2);
+  animation-play-state: paused;
 }
-.cta-btn:hover::before { left: 100%; }
+.cta-btn:hover::before { left: 120%; }
+.cta-btn.large { font-size: 0.85rem; padding: 1.4rem 3.5rem; }
 
-/* ---- REVEAL ANIMATION ---- */
+@keyframes ctaBreathe {
+  0%, 100% { box-shadow: 0 0 30px rgba(212,168,67,0.35), 0 0 60px rgba(212,168,67,0.12); }
+  50%      { box-shadow: 0 0 45px rgba(212,168,67,0.55), 0 0 90px rgba(212,168,67,0.2); }
+}
+
+/* ---- BADGE DE OFERTA ---- */
+.offer-badge {
+  display: inline-block;
+  background: linear-gradient(135deg, var(--red), #c1121f);
+  color: #fff;
+  font-family: 'Cinzel', serif;
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  padding: 0.45rem 1.4rem;
+  border-radius: 2px;
+  text-indent: 0.25em;
+  animation: ofertaPulse 2.4s ease-in-out infinite;
+}
+
+/* ---- BLOQUE DE PRECIO ---- */
+.price-block { text-align: center; }
+.price-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.1rem;
+  flex-wrap: wrap;
+}
+.price-old {
+  font-size: 1.5rem;
+  color: rgba(255,255,255,0.32);
+  text-decoration: line-through;
+  text-decoration-color: rgba(230,57,70,0.8);
+  text-decoration-thickness: 2px;
+}
+.price-new {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: clamp(3.2rem, 11vw, 5rem);
+  font-weight: 400;
+  color: #fff;
+  line-height: 1;
+  filter: drop-shadow(0 0 30px rgba(212,168,67,0.5));
+}
+.price-new .cur { font-size: 0.45em; vertical-align: super; }
+.discount-tag {
+  display: inline-block;
+  background: rgba(230,57,70,0.15);
+  border: 1px solid rgba(230,57,70,0.5);
+  color: #ff8189;
+  font-family: 'Cinzel', serif;
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  padding: 0.3rem 0.7rem;
+  border-radius: 2px;
+}
+.price-note {
+  font-family: 'Cinzel', serif;
+  font-size: 0.72rem;
+  color: var(--gold);
+  letter-spacing: 0.15em;
+  display: block;
+  margin-top: 0.6rem;
+}
+
+/* ---- TARJETAS ---- */
+.card {
+  background: linear-gradient(135deg, rgba(255,255,255,0.04) 0%, rgba(212,168,67,0.03) 100%);
+  border: 1px solid rgba(212,168,67,0.15);
+  border-radius: 6px;
+  padding: 2rem 1.8rem;
+  transition: transform 0.35s ease, border-color 0.35s ease, background 0.35s ease;
+  backdrop-filter: blur(8px);
+}
+.card:hover { transform: translateY(-5px); border-color: rgba(212,168,67,0.4); }
+.card.teal { border-color: rgba(78,205,196,0.14); background: linear-gradient(135deg, rgba(255,255,255,0.04) 0%, rgba(78,205,196,0.03) 100%); }
+.card.teal:hover { border-color: rgba(78,205,196,0.4); }
+.card.purple { border-color: rgba(192,132,232,0.16); background: linear-gradient(135deg, rgba(255,255,255,0.04) 0%, rgba(155,89,182,0.04) 100%); }
+.card.purple:hover { border-color: rgba(192,132,232,0.45); }
+.card-icon { font-size: 1.6rem; margin-bottom: 1rem; }
+.card-title { font-family: 'Cinzel', serif; font-size: 0.85rem; margin-bottom: 0.6rem; letter-spacing: 0.05em; color: var(--gold-bright); }
+.card.teal .card-title { color: var(--teal); }
+.card.purple .card-title { color: var(--purple); }
+.card p { font-size: 0.88rem; color: var(--white-dim); line-height: 1.75; }
+
+.grid-auto { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; }
+.grid-two  { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; }
+.grid-book { display: grid; grid-template-columns: 1fr 1.5fr; gap: 4rem; align-items: center; }
+
+/* ---- CAPÍTULOS ---- */
+.chapter {
+  display: flex;
+  align-items: flex-start;
+  gap: 2rem;
+  padding: 2rem 2.2rem;
+  background: linear-gradient(135deg, rgba(255,255,255,0.03) 0%, rgba(212,168,67,0.03) 100%);
+  border: 1px solid rgba(212,168,67,0.12);
+  border-left: 2px solid rgba(212,168,67,0.35);
+  border-radius: 6px;
+  transition: border-color 0.3s ease, background 0.3s ease, transform 0.3s ease;
+  backdrop-filter: blur(4px);
+}
+.chapter:hover { border-color: rgba(212,168,67,0.4); border-left-color: var(--gold-bright); transform: translateX(4px); }
+.chapter .num {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: 2.5rem;
+  color: var(--gold);
+  opacity: 0.35;
+  line-height: 1;
+  min-width: 3rem;
+  flex-shrink: 0;
+}
+.chapter h3 {
+  font-family: 'Cinzel', serif;
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--gold-bright);
+  margin-bottom: 0.5rem;
+  letter-spacing: 0.05em;
+}
+.chapter p { font-size: 0.9rem; color: var(--white-dim); line-height: 1.8; }
+.chapter.teal   { border-left-color: rgba(78,205,196,0.4); }
+.chapter.teal .num, .chapter.teal h3 { color: var(--teal); }
+.chapter.teal:hover { border-left-color: var(--teal); border-color: rgba(78,205,196,0.35); }
+.chapter.purple { border-left-color: rgba(192,132,232,0.4); }
+.chapter.purple .num, .chapter.purple h3 { color: var(--purple); }
+.chapter.purple:hover { border-left-color: var(--purple); border-color: rgba(192,132,232,0.4); }
+
+/* ---- LISTAS ---- */
+.check-list { list-style: none; display: flex; flex-direction: column; gap: 1rem; }
+.check-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.8rem;
+  font-size: 0.88rem;
+  color: var(--white-dim);
+  line-height: 1.65;
+}
+.check-list li span { color: var(--gold); flex-shrink: 0; margin-top: 0.2rem; }
+.check-list.muted li { color: rgba(255,255,255,0.32); }
+.check-list.muted li span { color: rgba(255,255,255,0.32); }
+
+/* ---- FAQ ---- */
+.faq details {
+  border-bottom: 1px solid rgba(212,168,67,0.12);
+  padding: 1.2rem 0;
+}
+.faq summary {
+  font-family: 'Cinzel', serif;
+  font-size: 0.95rem;
+  color: var(--white);
+  cursor: pointer;
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  transition: color 0.25s ease;
+}
+.faq summary:hover { color: var(--gold-bright); }
+.faq summary::-webkit-details-marker { display: none; }
+.faq summary::after {
+  content: '+';
+  color: var(--gold);
+  font-size: 1.3rem;
+  line-height: 1;
+  transition: transform 0.3s ease;
+  flex-shrink: 0;
+}
+.faq details[open] summary::after { transform: rotate(45deg); }
+.faq details p {
+  font-size: 0.9rem;
+  color: var(--white-dim);
+  line-height: 1.85;
+  padding-top: 0.9rem;
+  max-width: 90%;
+}
+
+/* ---- GARANTÍA ---- */
+.guarantee {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  background: linear-gradient(135deg, rgba(78,205,196,0.06), rgba(212,168,67,0.04));
+  border: 1px solid rgba(78,205,196,0.22);
+  border-radius: 10px;
+  padding: 2.2rem 2.5rem;
+  max-width: 720px;
+  margin: 0 auto;
+}
+.guarantee .seal {
+  flex-shrink: 0;
+  width: 82px; height: 82px;
+  border: 1px solid rgba(78,205,196,0.4);
+  border-radius: 50%;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  font-family: 'Cinzel', serif;
+  color: var(--teal);
+  line-height: 1.1;
+  background: radial-gradient(circle, rgba(78,205,196,0.12), transparent 70%);
+}
+.guarantee .seal b { font-size: 1.6rem; font-weight: 600; }
+.guarantee .seal small { font-size: 0.5rem; letter-spacing: 0.2em; text-transform: uppercase; }
+.guarantee h3 { font-family: 'Cinzel', serif; font-size: 1rem; color: var(--teal); margin-bottom: 0.5rem; letter-spacing: 0.05em; }
+.guarantee p { font-size: 0.88rem; color: var(--white-dim); line-height: 1.8; }
+
+/* ---- FILA DE CONFIANZA ---- */
+.trust-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+  margin-top: 2rem;
+}
+.trust-row span {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.65rem;
+  color: var(--white-faint);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+/* ---- REVEAL ---- */
 .reveal {
   opacity: 0;
-  transform: translateY(30px);
+  transform: translateY(28px);
   transition: opacity 0.8s ease, transform 0.8s ease;
 }
 .reveal.visible { opacity: 1; transform: translateY(0); }
 
-/* ---- STICKY BAR ---- */
+/* ---- BARRA FIJA ---- */
 .sticky-bar {
   position: fixed;
   bottom: 0; left: 0; right: 0;
   background: rgba(3,4,15,0.95);
   border-top: 1px solid rgba(212,168,67,0.25);
-  padding: 0.85rem 2rem;
+  padding: 0.8rem 1.5rem;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 2rem;
+  gap: 1.5rem;
   z-index: 999;
   backdrop-filter: blur(20px);
-  transform: translateY(100%);
+  transform: translateY(110%);
   transition: transform 0.5s ease;
   flex-wrap: wrap;
 }
 .sticky-bar.show { transform: translateY(0); }
 .sticky-bar p {
   font-family: 'Cinzel', serif;
-  font-size: 0.8rem;
+  font-size: 0.78rem;
   color: var(--white-dim);
-  letter-spacing: 0.1em;
+  letter-spacing: 0.08em;
 }
+.sticky-bar p s { color: rgba(255,255,255,0.25); margin-right: 0.4rem; }
+.sticky-bar p b { color: var(--gold-bright); font-weight: 600; }
 .sticky-cta {
-  padding: 0.55rem 2rem;
+  padding: 0.6rem 1.8rem;
   background: linear-gradient(135deg, var(--gold) 0%, #b8882a 100%);
   color: #080512;
   text-decoration: none;
@@ -275,63 +534,121 @@ h2.section-heading em {
   border-radius: 2px;
   white-space: nowrap;
   box-shadow: 0 0 20px rgba(212,168,67,0.3);
+  transition: transform 0.3s ease;
+}
+.sticky-cta:hover { transform: scale(1.04); }
+
+/* ---- ANIMACIONES ---- */
+@keyframes nebulaDrift {
+  0%   { transform: translate(0, 0) scale(1); }
+  100% { transform: translate(4vw, 3vh) scale(1.08); }
+}
+@keyframes ofertaPulse {
+  0%, 100% { box-shadow: 0 0 20px rgba(230,57,70,0.45); }
+  50%      { box-shadow: 0 0 35px rgba(230,57,70,0.8), 0 0 60px rgba(230,57,70,0.25); }
+}
+@keyframes cosmicPulse {
+  0%, 100% { transform: scale(1); opacity: 0.8; }
+  50%      { transform: scale(1.08); opacity: 1; }
+}
+@keyframes scrollBounce {
+  0%, 100% { transform: translateX(-50%) translateY(0); opacity: 0.6; }
+  50%      { transform: translateX(-50%) translateY(6px); opacity: 1; }
+}
+
+/* ---- RESPONSIVE ---- */
+@media (max-width: 860px) {
+  :root { --sect-y: 4.5rem; }
+  .grid-two, .grid-book { grid-template-columns: 1fr; gap: 2.5rem; }
+  .grid-book .book-col { order: -1; }
+  .cosmic-section { padding-left: 1.25rem; padding-right: 1.25rem; }
+  .chapter { gap: 1.2rem; padding: 1.6rem 1.4rem; }
+  .chapter .num { font-size: 1.9rem; min-width: 2.2rem; }
+  .guarantee { flex-direction: column; text-align: center; padding: 2rem 1.5rem; gap: 1.4rem; }
+  .price-box { padding: 2rem 1.5rem !important; }
+  .cta-btn { padding: 1.1rem 1.8rem; font-size: 0.7rem; letter-spacing: 0.15em; }
+  .cta-btn.large { padding: 1.2rem 2rem; font-size: 0.72rem; }
+  .trust-row { gap: 1.2rem; }
+  .sticky-bar { gap: 0.9rem; padding: 0.7rem 1rem; }
+  .sticky-bar p { font-size: 0.7rem; }
+  .faq details p { max-width: 100%; }
+}
+
+@media (max-width: 420px) {
+  .trust-row .sep { display: none; }
+  .eyebrow { letter-spacing: 0.3em; font-size: 0.6rem; }
+}
+
+/* ---- MOVIMIENTO REDUCIDO ---- */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  .reveal { opacity: 1; transform: none; }
 }
 </style>
+</head>
+<body>
 
-<!-- Fixed backgrounds (siempre presentes) -->
-<canvas id="starCanvas"></canvas>
-<div class="nebula-bg"></div>
-<div class="nebula-orb nebula-orb-1"></div>
-<div class="nebula-orb nebula-orb-2"></div>
+<div id="progressBar"></div>
+
+<!-- Fondos fijos -->
+<canvas id="starCanvas" aria-hidden="true"></canvas>
+<div class="nebula-bg" aria-hidden="true"></div>
+<div class="nebula-orb nebula-orb-1" aria-hidden="true"></div>
+<div class="nebula-orb nebula-orb-2" aria-hidden="true"></div>
 
 <!-- ============================================================
   SECCIÓN 1 — HERO
-  Pegar como bloque HTML personalizado
 ============================================================ -->
-<section class="cosmic-section" id="hero" style="min-height:100vh; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding-top: 8rem;">
+<section class="cosmic-section" id="hero" style="min-height:100vh; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding-top:6rem;">
 
-  <!-- Glow central -->
-  <div style="position:absolute; top:50%; left:50%; transform:translate(-50%,-60%); width:600px; height:600px; background:radial-gradient(circle, rgba(212,168,67,0.12) 0%, transparent 65%); pointer-events:none; z-index:0;"></div>
+  <div style="position:absolute; top:50%; left:50%; transform:translate(-50%,-60%); width:600px; max-width:120vw; height:600px; background:radial-gradient(circle, rgba(212,168,67,0.12) 0%, transparent 65%); pointer-events:none; z-index:0;" aria-hidden="true"></div>
 
-  <!-- Círculo cósmico decorativo -->
-  <div style="position:relative; z-index:1; margin-bottom:2.5rem;" class="reveal">
-    <div style="width:120px; height:120px; border:1px solid rgba(212,168,67,0.3); border-radius:50%; margin:0 auto; display:flex; align-items:center; justify-content:center; position:relative; animation: cosmicPulse 4s ease-in-out infinite;">
+  <!-- Sello cósmico -->
+  <div class="reveal" style="position:relative; z-index:1; margin-bottom:2.5rem;" aria-hidden="true">
+    <div style="width:120px; height:120px; border:1px solid rgba(212,168,67,0.3); border-radius:50%; margin:0 auto; display:flex; align-items:center; justify-content:center; position:relative; animation:cosmicPulse 4s ease-in-out infinite;">
       <div style="width:90px; height:90px; border:1px solid rgba(78,205,196,0.2); border-radius:50%; display:flex; align-items:center; justify-content:center;">
-        <div style="width:60px; height:60px; background:radial-gradient(circle, rgba(212,168,67,0.4), transparent); border-radius:50%; animation: cosmicPulse 2.5s ease-in-out infinite;"></div>
+        <div style="width:60px; height:60px; background:radial-gradient(circle, rgba(212,168,67,0.4), transparent); border-radius:50%; animation:cosmicPulse 2.5s ease-in-out infinite;"></div>
       </div>
-      <div style="position:absolute; top:-4px; left:50%; transform:translateX(-50%); width:8px; height:8px; background:var(--gold); border-radius:50; box-shadow: 0 0 10px var(--gold);"></div>
+      <div style="position:absolute; top:-4px; left:50%; transform:translateX(-50%); width:8px; height:8px; background:var(--gold); border-radius:50%; box-shadow:0 0 10px var(--gold);"></div>
     </div>
   </div>
 
-  <span class="eyebrow reveal" style="animation-delay:0.1s">✦ &nbsp; Una guía para los que han sido llamados &nbsp; ✦</span>
+  <span class="eyebrow reveal">✦ &nbsp; Una guía para los que han sido llamados &nbsp; ✦</span>
 
-  <h1 class="cosmic-title reveal" style="animation-delay:0.2s;">
-    El Camino<br>del Elegido
-  </h1>
+  <h1 class="cosmic-title gold-text reveal">El Camino<br>del Elegido</h1>
 
-  <p class="sub-title reveal" style="animation-delay:0.35s; font-style:italic;">
+  <p class="sub-title reveal" style="font-style:italic;">
     Despierta el poder que dormía en ti.<br>Descubre tu misión en el universo. Transforma tu destino.
   </p>
 
-  <div class="star-divider reveal" style="animation-delay:0.5s;"><span>✦ ✦ ✦</span></div>
+  <div class="star-divider reveal"><span>✦ ✦ ✦</span></div>
 
-  <div class="reveal" style="animation-delay:0.65s; text-align:center; margin-bottom:2.5rem;">
-    <div style="display:inline-block; background:linear-gradient(135deg, #e63946, #c1121f); color:#fff; font-family:'Cinzel', serif; font-size:0.62rem; font-weight:600; letter-spacing:0.25em; text-transform:uppercase; padding:0.45rem 1.4rem; border-radius:2px; margin-bottom:1rem; box-shadow:0 0 20px rgba(230,57,70,0.5); animation:ofertaPulse 2s ease-in-out infinite;">⚡ Oferta por Tiempo Limitado ⚡</div>
-    <div style="font-family:'Raleway'; font-size:1.1rem; color:rgba(255,255,255,0.35); text-decoration:line-through; margin-bottom:0.2rem;">Antes 10,99€</div>
-    <div style="font-family:'Cinzel Decorative', serif; font-size:4.5rem; font-weight:400; color:var(--white); line-height:1; filter:drop-shadow(0 0 30px rgba(212,168,67,0.5));"><span style="font-size:2rem; vertical-align:super; font-weight:400;">€</span>4,99</div>
-    <div style="font-size:0.6rem; color:rgba(255,255,255,0.3); letter-spacing:0.2em; margin-top:0.3rem; text-transform:uppercase;">Ahorras 6€ — Solo por tiempo limitado</div>
+  <!-- Precio hero -->
+  <div class="reveal price-block" style="margin-bottom:2.5rem;">
+    <div class="offer-badge" style="margin-bottom:1.1rem;">⚡ Oferta de lanzamiento ⚡</div>
+    <div class="price-row">
+      <span class="price-old">19,99€</span>
+      <span class="discount-tag">−45%</span>
+    </div>
+    <div class="price-new"><span class="cur">€</span>10,99</div>
+    <span class="price-note">Pago único · Ahorras 9€</span>
   </div>
 
-  <a href="https://pay.hotmart.com/L97972781G?off=q63b5zfg" class="cta-btn reveal" style="animation-delay:0.8s;">
-    ✦ &nbsp; Despertar Mi Poder Ahora &nbsp; ✦
+  <!-- ENLACE-COMPRA -->
+  <a href="https://pay.hotmart.com/L97972781G?bid=1785874653201" class="cta-btn large reveal" rel="noopener">
+    ✦ &nbsp; Quiero despertar mi poder &nbsp; ✦
   </a>
 
-  <p class="reveal" style="animation-delay:0.95s; margin-top:1.2rem; font-size:0.65rem; color:var(--white-faint); letter-spacing:0.2em; text-transform:uppercase;">
+  <p class="reveal" style="margin-top:1.2rem; font-size:0.65rem; color:var(--white-faint); letter-spacing:0.2em; text-transform:uppercase;">
     Descarga inmediata &nbsp;·&nbsp; Pago 100% seguro &nbsp;·&nbsp; Hotmart
   </p>
 
-  <!-- Scroll indicator -->
-  <div style="position:absolute; bottom:2.5rem; left:50%; transform:translateX(-50%); animation:scrollBounce 2s ease-in-out infinite; z-index:1;" class="reveal" style="animation-delay:1.2s;">
+  <div style="position:absolute; bottom:2rem; left:50%; transform:translateX(-50%); animation:scrollBounce 2s ease-in-out infinite; z-index:1;" aria-hidden="true">
     <svg width="22" height="32" viewBox="0 0 22 32" fill="none">
       <rect x="1" y="1" width="20" height="30" rx="10" stroke="rgba(212,168,67,0.4)" stroke-width="1.5"/>
       <rect x="9.5" y="6" width="3" height="8" rx="1.5" fill="rgba(212,168,67,0.6)">
@@ -344,9 +661,8 @@ h2.section-heading em {
 
 <!-- ============================================================
   SECCIÓN 2 — PROBLEMA / DOLOR
-  Pegar como bloque HTML personalizado
 ============================================================ -->
-<section class="cosmic-section" style="background: linear-gradient(180deg, transparent 0%, rgba(15,5,40,0.6) 50%, transparent 100%);">
+<section class="cosmic-section" style="background:linear-gradient(180deg, transparent 0%, rgba(15,5,40,0.6) 50%, transparent 100%);">
   <div class="container">
     <span class="eyebrow reveal">¿Te reconoces en esto?</span>
     <h2 class="section-heading reveal">Hay señales que no puedes<br><em>ignorar</em></h2>
@@ -355,43 +671,42 @@ h2.section-heading em {
       Si llevas tiempo sintiendo esto, el universo lleva tiempo mandándote un mensaje.
     </p>
 
-    <!-- Pain cards grid -->
-    <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(260px, 1fr)); gap:1.5rem; margin-bottom:3rem;" class="reveal">
+    <div class="grid-auto reveal" style="margin-bottom:3rem;">
 
-      <div style="background:linear-gradient(135deg, rgba(255,255,255,0.04) 0%, rgba(212,168,67,0.03) 100%); border:1px solid rgba(212,168,67,0.15); border-radius:6px; padding:2rem 1.8rem; transition:all 0.35s ease; backdrop-filter:blur(8px);" onmouseover="this.style.borderColor='rgba(212,168,67,0.4)';this.style.transform='translateY(-5px)'" onmouseout="this.style.borderColor='rgba(212,168,67,0.15)';this.style.transform='translateY(0)'">
-        <div style="font-size:1.6rem; margin-bottom:1rem; filter:drop-shadow(0 0 8px rgba(212,168,67,0.5));">🌌</div>
-        <p style="font-family:'Cinzel', serif; font-size:0.85rem; color:var(--gold-bright); margin-bottom:0.6rem; letter-spacing:0.05em;">Eres diferente</p>
-        <p style="font-size:0.88rem; color:var(--white-dim); line-height:1.7;">Sientes que no encajas del todo en el mundo que te rodea. Como si hubieras nacido en el lugar equivocado, o en el momento justo.</p>
+      <div class="card">
+        <div class="card-icon">🌌</div>
+        <p class="card-title">Eres diferente</p>
+        <p>Sientes que no encajas del todo en el mundo que te rodea. Como si hubieras nacido en el lugar equivocado, o en el momento justo.</p>
       </div>
 
-      <div style="background:linear-gradient(135deg, rgba(255,255,255,0.04) 0%, rgba(78,205,196,0.03) 100%); border:1px solid rgba(78,205,196,0.12); border-radius:6px; padding:2rem 1.8rem; transition:all 0.35s ease; backdrop-filter:blur(8px);" onmouseover="this.style.borderColor='rgba(78,205,196,0.35)';this.style.transform='translateY(-5px)'" onmouseout="this.style.borderColor='rgba(78,205,196,0.12)';this.style.transform='translateY(0)'">
-        <div style="font-size:1.6rem; margin-bottom:1rem; filter:drop-shadow(0 0 8px rgba(78,205,196,0.5));">⭐</div>
-        <p style="font-family:'Cinzel', serif; font-size:0.85rem; color:var(--teal); margin-bottom:0.6rem; letter-spacing:0.05em;">Intuición poderosa</p>
-        <p style="font-size:0.88rem; color:var(--white-dim); line-height:1.7;">Has tenido sueños, visiones o presentimientos que luego se hicieron realidad. Y no sabes explicar de dónde vienen.</p>
+      <div class="card teal">
+        <div class="card-icon">⭐</div>
+        <p class="card-title">Intuición poderosa</p>
+        <p>Has tenido sueños, visiones o presentimientos que luego se hicieron realidad. Y no sabes explicar de dónde vienen.</p>
       </div>
 
-      <div style="background:linear-gradient(135deg, rgba(255,255,255,0.04) 0%, rgba(155,89,182,0.04) 100%); border:1px solid rgba(155,89,182,0.15); border-radius:6px; padding:2rem 1.8rem; transition:all 0.35s ease; backdrop-filter:blur(8px);" onmouseover="this.style.borderColor='rgba(155,89,182,0.4)';this.style.transform='translateY(-5px)'" onmouseout="this.style.borderColor='rgba(155,89,182,0.15)';this.style.transform='translateY(0)'">
-        <div style="font-size:1.6rem; margin-bottom:1rem; filter:drop-shadow(0 0 8px rgba(155,89,182,0.5));">🌠</div>
-        <p style="font-family:'Cinzel', serif; font-size:0.85rem; color:#c084e8; margin-bottom:0.6rem; letter-spacing:0.05em;">Un llamado urgente</p>
-        <p style="font-size:0.88rem; color:var(--white-dim); line-height:1.7;">Hay algo dentro de ti que dice que ya es hora. Una urgencia que no puedes callar con distracciones ni excusas.</p>
+      <div class="card purple">
+        <div class="card-icon">🌠</div>
+        <p class="card-title">Un llamado urgente</p>
+        <p>Hay algo dentro de ti que dice que ya es hora. Una urgencia que no puedes callar con distracciones ni excusas.</p>
       </div>
 
-      <div style="background:linear-gradient(135deg, rgba(255,255,255,0.04) 0%, rgba(212,168,67,0.03) 100%); border:1px solid rgba(212,168,67,0.15); border-radius:6px; padding:2rem 1.8rem; transition:all 0.35s ease; backdrop-filter:blur(8px);" onmouseover="this.style.borderColor='rgba(212,168,67,0.4)';this.style.transform='translateY(-5px)'" onmouseout="this.style.borderColor='rgba(212,168,67,0.15)';this.style.transform='translateY(0)'">
-        <div style="font-size:1.6rem; margin-bottom:1rem; filter:drop-shadow(0 0 8px rgba(212,168,67,0.5));">⚡</div>
-        <p style="font-family:'Cinzel', serif; font-size:0.85rem; color:var(--gold-bright); margin-bottom:0.6rem; letter-spacing:0.05em;">Pruebas que te forjaron</p>
-        <p style="font-size:0.88rem; color:var(--white-dim); line-height:1.7;">Has pasado por momentos muy duros que otros no comprenden. Ahora sabes que esas pruebas te preparaban para algo.</p>
+      <div class="card">
+        <div class="card-icon">⚡</div>
+        <p class="card-title">Pruebas que te forjaron</p>
+        <p>Has pasado por momentos muy duros que otros no comprenden. Ahora sabes que esas pruebas te preparaban para algo.</p>
       </div>
 
-      <div style="background:linear-gradient(135deg, rgba(255,255,255,0.04) 0%, rgba(78,205,196,0.03) 100%); border:1px solid rgba(78,205,196,0.12); border-radius:6px; padding:2rem 1.8rem; transition:all 0.35s ease; backdrop-filter:blur(8px);" onmouseover="this.style.borderColor='rgba(78,205,196,0.35)';this.style.transform='translateY(-5px)'" onmouseout="this.style.borderColor='rgba(78,205,196,0.12)';this.style.transform='translateY(0)'">
-        <div style="font-size:1.6rem; margin-bottom:1rem; filter:drop-shadow(0 0 8px rgba(78,205,196,0.5));">🔮</div>
-        <p style="font-family:'Cinzel', serif; font-size:0.85rem; color:var(--teal); margin-bottom:0.6rem; letter-spacing:0.05em;">Bloqueos invisibles</p>
-        <p style="font-size:0.88rem; color:var(--white-dim); line-height:1.7;">Sabes lo que quieres, pero hay algo que te frena. Como una fuerza que no puedes ver pero que sientes con claridad.</p>
+      <div class="card teal">
+        <div class="card-icon">🔮</div>
+        <p class="card-title">Bloqueos invisibles</p>
+        <p>Sabes lo que quieres, pero hay algo que te frena. Como una fuerza que no puedes ver pero que sientes con claridad.</p>
       </div>
 
-      <div style="background:linear-gradient(135deg, rgba(255,255,255,0.04) 0%, rgba(155,89,182,0.04) 100%); border:1px solid rgba(155,89,182,0.15); border-radius:6px; padding:2rem 1.8rem; transition:all 0.35s ease; backdrop-filter:blur(8px);" onmouseover="this.style.borderColor='rgba(155,89,182,0.4)';this.style.transform='translateY(-5px)'" onmouseout="this.style.borderColor='rgba(155,89,182,0.15)';this.style.transform='translateY(0)'">
-        <div style="font-size:1.6rem; margin-bottom:1rem; filter:drop-shadow(0 0 8px rgba(155,89,182,0.5));">✨</div>
-        <p style="font-family:'Cinzel', serif; font-size:0.85rem; color:#c084e8; margin-bottom:0.6rem; letter-spacing:0.05em;">Propósito más grande</p>
-        <p style="font-size:0.88rem; color:var(--white-dim); line-height:1.7;">No te conformas con una vida mediocre. Sientes en tus huesos que debes dejar una marca real en el mundo.</p>
+      <div class="card purple">
+        <div class="card-icon">✨</div>
+        <p class="card-title">Propósito más grande</p>
+        <p>No te conformas con una vida mediocre. Sientes en tus huesos que debes dejar una marca real en el mundo.</p>
       </div>
 
     </div>
@@ -405,8 +720,7 @@ h2.section-heading em {
 </section>
 
 <!-- ============================================================
-  SECCIÓN 3 — SOLUCIÓN / EL LIBRO
-  Pegar como bloque HTML personalizado
+  SECCIÓN 3 — EL LIBRO
 ============================================================ -->
 <section class="cosmic-section" style="background:linear-gradient(180deg, transparent 0%, rgba(10,4,30,0.7) 50%, transparent 100%);">
   <div class="container">
@@ -415,57 +729,47 @@ h2.section-heading em {
 
     <div class="star-divider reveal"><span>✦ ✦ ✦</span></div>
 
-    <!-- Book mockup + text -->
-    <div style="display:grid; grid-template-columns:1fr 1.5fr; gap:4rem; align-items:center; margin-top:3rem;" class="reveal">
+    <div class="grid-book reveal" style="margin-top:3rem;">
 
-      <!-- Book cover -->
-      <div style="display:flex; justify-content:center; align-items:center;">
+      <!-- Portada -->
+      <div class="book-col" style="display:flex; justify-content:center; align-items:center;">
         <div style="position:relative;">
-          <!-- Glow behind book -->
-          <div style="position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); width:280px; height:280px; background:radial-gradient(circle, rgba(212,168,67,0.2) 0%, transparent 70%); border-radius:50%; animation:cosmicPulse 4s ease-in-out infinite;"></div>
+          <div style="position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); width:280px; height:280px; background:radial-gradient(circle, rgba(212,168,67,0.2) 0%, transparent 70%); border-radius:50%; animation:cosmicPulse 4s ease-in-out infinite;" aria-hidden="true"></div>
 
-          <!-- Book -->
-          <div style="width:200px; height:280px; background:linear-gradient(145deg, #080520 0%, #130a35 40%, #0c0620 100%); border-radius:4px 10px 10px 4px; position:relative; box-shadow: -5px 8px 0 #04020e, 6px 15px 50px rgba(0,0,0,0.6), 0 0 60px rgba(212,168,67,0.15); display:flex; flex-direction:column; align-items:center; justify-content:center; padding:1.8rem 1.2rem; text-align:center; overflow:hidden;">
-            <!-- Star pattern inside -->
-            <div style="position:absolute; inset:0; background: radial-gradient(ellipse at 30% 20%, rgba(212,168,67,0.08) 0%, transparent 50%), radial-gradient(ellipse at 80% 70%, rgba(78,205,196,0.06) 0%, transparent 50%); pointer-events:none;"></div>
+          <div style="width:200px; height:280px; background:linear-gradient(145deg, #080520 0%, #130a35 40%, #0c0620 100%); border-radius:4px 10px 10px 4px; position:relative; box-shadow:-5px 8px 0 #04020e, 6px 15px 50px rgba(0,0,0,0.6), 0 0 60px rgba(212,168,67,0.15); display:flex; flex-direction:column; align-items:center; justify-content:center; padding:1.8rem 1.2rem; text-align:center; overflow:hidden;">
+            <div style="position:absolute; inset:0; background:radial-gradient(ellipse at 30% 20%, rgba(212,168,67,0.08) 0%, transparent 50%), radial-gradient(ellipse at 80% 70%, rgba(78,205,196,0.06) 0%, transparent 50%); pointer-events:none;"></div>
 
             <div style="position:relative; z-index:1; width:100%;">
-              <div style="font-size:0.55rem; letter-spacing:0.35em; text-transform:uppercase; color:rgba(212,168,67,0.7); margin-bottom:1.2rem; font-family:'Raleway';">✦ Ebook Exclusivo ✦</div>
-
+              <div style="font-size:0.55rem; letter-spacing:0.35em; text-transform:uppercase; color:rgba(212,168,67,0.7); margin-bottom:1.2rem;">✦ Ebook exclusivo ✦</div>
               <div style="width:35px; height:1px; background:linear-gradient(to right, transparent, var(--gold), transparent); margin:0 auto 1.2rem;"></div>
-
-              <div style="font-family:'Cinzel Decorative', serif; font-size:1rem; font-weight:400; color:#fff; line-height:1.4; margin-bottom:0.5rem; filter:drop-shadow(0 0 8px rgba(212,168,67,0.3));">El Camino<br>del Elegido</div>
-
+              <div style="font-family:'Cinzel Decorative', serif; font-size:1rem; color:#fff; line-height:1.4; margin-bottom:0.5rem; filter:drop-shadow(0 0 8px rgba(212,168,67,0.3));">El Camino<br>del Elegido</div>
               <div style="width:35px; height:1px; background:linear-gradient(to right, transparent, var(--gold), transparent); margin:1rem auto;"></div>
-
-              <div style="font-family:'Cinzel', serif; font-size:0.6rem; color:rgba(212,168,67,0.8); letter-spacing:0.1em; line-height:1.5;">Despierta Tu Poder<br>y Transforma Tu Destino</div>
-
-              <!-- Stars decoration -->
+              <div style="font-family:'Cinzel', serif; font-size:0.6rem; color:rgba(212,168,67,0.8); letter-spacing:0.1em; line-height:1.5;">Despierta tu poder<br>y transforma tu destino</div>
               <div style="margin-top:1.5rem; color:rgba(212,168,67,0.4); font-size:0.5rem; letter-spacing:0.5em;">✦ ✦ ✦ ✦ ✦</div>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- Text -->
+      <!-- Texto -->
       <div>
         <p style="font-size:0.95rem; color:var(--white-dim); line-height:2; margin-bottom:1.5rem;">
-          Mientras la mayoría de libros te dan consejos genéricos que no cambian nada, 
-          <strong style="color:var(--gold-bright); font-weight:500;">El Camino del Elegido</strong> va directo al núcleo: 
+          Mientras la mayoría de libros te dan consejos genéricos que no cambian nada,
+          <strong style="color:var(--gold-bright); font-weight:500;">El Camino del Elegido</strong> va directo al núcleo:
           quién eres en realidad, qué te bloquea y cómo activar tu potencial dormido.
         </p>
         <p style="font-size:0.95rem; color:var(--white-dim); line-height:2; margin-bottom:1.5rem;">
-          Es un sistema integrado que combina enseñanzas ancestrales, psicología del despertar 
-          y herramientas prácticas de manifestación. No teoría vacía: 
+          Es un sistema integrado que combina enseñanzas ancestrales, psicología del despertar
+          y herramientas prácticas de manifestación. No teoría vacía:
           <em style="color:var(--teal);">un mapa concreto para transformar tu vida desde adentro.</em>
         </p>
 
         <div style="background:linear-gradient(135deg, rgba(212,168,67,0.07), rgba(78,205,196,0.05)); border:1px solid rgba(212,168,67,0.2); border-radius:6px; padding:1.5rem 1.8rem; margin-top:1.5rem;">
-          <p style="font-family:'Cinzel', serif; font-size:0.85rem; color:var(--gold-bright); letter-spacing:0.05em; margin-bottom:0.5rem;">Basado en:</p>
-          <ul style="list-style:none; display:flex; flex-direction:column; gap:0.6rem;">
-            <li style="font-size:0.85rem; color:var(--white-dim); display:flex; gap:0.8rem; align-items:flex-start;"><span style="color:var(--gold); flex-shrink:0;">✦</span> Enseñanzas esotéricas y filosóficas ancestrales</li>
-            <li style="font-size:0.85rem; color:var(--white-dim); display:flex; gap:0.8rem; align-items:flex-start;"><span style="color:var(--teal); flex-shrink:0;">✦</span> Psicología transpersonal y del despertar</li>
-            <li style="font-size:0.85rem; color:var(--white-dim); display:flex; gap:0.8rem; align-items:flex-start;"><span style="color:#c084e8; flex-shrink:0;">✦</span> Técnicas de manifestación y neurociencia cognitiva</li>
+          <p style="font-family:'Cinzel', serif; font-size:0.85rem; color:var(--gold-bright); letter-spacing:0.05em; margin-bottom:0.8rem;">Basado en:</p>
+          <ul class="check-list">
+            <li><span>✦</span> Enseñanzas esotéricas y filosóficas ancestrales</li>
+            <li><span style="color:var(--teal);">✦</span> Psicología transpersonal y del despertar</li>
+            <li><span style="color:var(--purple);">✦</span> Técnicas de manifestación y neurociencia cognitiva</li>
           </ul>
         </div>
       </div>
@@ -474,8 +778,7 @@ h2.section-heading em {
 </section>
 
 <!-- ============================================================
-  SECCIÓN 4 — BENEFICIOS
-  Pegar como bloque HTML personalizado
+  SECCIÓN 4 — CAPÍTULOS / BENEFICIOS
 ============================================================ -->
 <section class="cosmic-section">
   <div class="container">
@@ -485,87 +788,95 @@ h2.section-heading em {
 
     <div style="display:flex; flex-direction:column; gap:1.2rem; margin-top:1rem;">
 
-      <div class="reveal" style="display:flex; align-items:flex-start; gap:2rem; padding:2rem 2.2rem; background:linear-gradient(135deg, rgba(255,255,255,0.03) 0%, rgba(212,168,67,0.03) 100%); border:1px solid rgba(212,168,67,0.12); border-radius:6px; transition:all 0.3s ease; backdrop-filter:blur(4px);" onmouseover="this.style.borderColor='rgba(212,168,67,0.35)'; this.style.background='linear-gradient(135deg, rgba(255,255,255,0.05) 0%, rgba(212,168,67,0.06) 100%)'" onmouseout="this.style.borderColor='rgba(212,168,67,0.12)'; this.style.background='linear-gradient(135deg, rgba(255,255,255,0.03) 0%, rgba(212,168,67,0.03) 100%)'">
-        <span style="font-family:'Cinzel Decorative', serif; font-size:2.5rem; color:var(--gold); opacity:0.35; line-height:1; min-width:3rem; flex-shrink:0;">01</span>
+      <div class="chapter reveal">
+        <span class="num">01</span>
         <div>
-          <h3 style="font-family:'Cinzel', serif; font-size:1.05rem; font-weight:600; color:var(--gold-bright); margin-bottom:0.5rem; letter-spacing:0.05em;">Las señales que confirman tu llamado</h3>
-          <p style="font-size:0.9rem; color:var(--white-dim); line-height:1.8;">Aprenderás a descifrar los patrones, sincronías y experiencias que el universo ha puesto en tu camino. No son coincidencias — son mensajes que ahora podrás leer con claridad.</p>
+          <h3>Las señales que confirman tu llamado</h3>
+          <p>Aprenderás a descifrar los patrones, sincronías y experiencias que el universo ha puesto en tu camino. No son coincidencias — son mensajes que ahora podrás leer con claridad.</p>
         </div>
       </div>
 
-      <div class="reveal" style="display:flex; align-items:flex-start; gap:2rem; padding:2rem 2.2rem; background:linear-gradient(135deg, rgba(255,255,255,0.03) 0%, rgba(78,205,196,0.03) 100%); border:1px solid rgba(78,205,196,0.1); border-radius:6px; transition:all 0.3s ease; backdrop-filter:blur(4px);" onmouseover="this.style.borderColor='rgba(78,205,196,0.3)'" onmouseout="this.style.borderColor='rgba(78,205,196,0.1)'">
-        <span style="font-family:'Cinzel Decorative', serif; font-size:2.5rem; color:var(--teal); opacity:0.35; line-height:1; min-width:3rem; flex-shrink:0;">02</span>
+      <div class="chapter teal reveal">
+        <span class="num">02</span>
         <div>
-          <h3 style="font-family:'Cinzel', serif; font-size:1.05rem; font-weight:600; color:var(--teal); margin-bottom:0.5rem; letter-spacing:0.05em;">Destruye los bloqueos que te frenan</h3>
-          <p style="font-size:0.9rem; color:var(--white-dim); line-height:1.8;">Identificarás y eliminarás las creencias limitantes heredadas, los miedos programados y los patrones inconscientes que llevan años robándote tu poder.</p>
+          <h3>Destruye los bloqueos que te frenan</h3>
+          <p>Identificarás y eliminarás las creencias limitantes heredadas, los miedos programados y los patrones inconscientes que llevan años robándote tu poder.</p>
         </div>
       </div>
 
-      <div class="reveal" style="display:flex; align-items:flex-start; gap:2rem; padding:2rem 2.2rem; background:linear-gradient(135deg, rgba(255,255,255,0.03) 0%, rgba(155,89,182,0.03) 100%); border:1px solid rgba(155,89,182,0.12); border-radius:6px; transition:all 0.3s ease; backdrop-filter:blur(4px);" onmouseover="this.style.borderColor='rgba(155,89,182,0.35)'" onmouseout="this.style.borderColor='rgba(155,89,182,0.12)'">
-        <span style="font-family:'Cinzel Decorative', serif; font-size:2.5rem; color:#c084e8; opacity:0.35; line-height:1; min-width:3rem; flex-shrink:0;">03</span>
+      <div class="chapter purple reveal">
+        <span class="num">03</span>
         <div>
-          <h3 style="font-family:'Cinzel', serif; font-size:1.05rem; font-weight:600; color:#c084e8; margin-bottom:0.5rem; letter-spacing:0.05em;">Activa tu vibración y manifiesta</h3>
-          <p style="font-size:0.9rem; color:var(--white-dim); line-height:1.8;">Técnicas probadas para elevar tu frecuencia energética y atraer hacia ti las circunstancias, personas y oportunidades alineadas con tu propósito de vida.</p>
+          <h3>Activa tu vibración y manifiesta</h3>
+          <p>Técnicas probadas para elevar tu frecuencia energética y atraer hacia ti las circunstancias, personas y oportunidades alineadas con tu propósito de vida.</p>
         </div>
       </div>
 
-      <div class="reveal" style="display:flex; align-items:flex-start; gap:2rem; padding:2rem 2.2rem; background:linear-gradient(135deg, rgba(255,255,255,0.03) 0%, rgba(212,168,67,0.03) 100%); border:1px solid rgba(212,168,67,0.12); border-radius:6px; transition:all 0.3s ease; backdrop-filter:blur(4px);" onmouseover="this.style.borderColor='rgba(212,168,67,0.35)'" onmouseout="this.style.borderColor='rgba(212,168,67,0.12)'">
-        <span style="font-family:'Cinzel Decorative', serif; font-size:2.5rem; color:var(--gold); opacity:0.35; line-height:1; min-width:3rem; flex-shrink:0;">04</span>
+      <div class="chapter reveal">
+        <span class="num">04</span>
         <div>
-          <h3 style="font-family:'Cinzel', serif; font-size:1.05rem; font-weight:600; color:var(--gold-bright); margin-bottom:0.5rem; letter-spacing:0.05em;">Espiritualidad y abundancia: los dos mundos</h3>
-          <p style="font-size:0.9rem; color:var(--white-dim); line-height:1.8;">Descubrirás por qué no tienes que elegir entre evolución espiritual y prosperidad material. Los verdaderos elegidos dominan ambos planos de existencia.</p>
+          <h3>Espiritualidad y abundancia: los dos mundos</h3>
+          <p>Descubrirás por qué no tienes que elegir entre evolución espiritual y prosperidad material. Los verdaderos elegidos dominan ambos planos de existencia.</p>
         </div>
       </div>
 
-      <div class="reveal" style="display:flex; align-items:flex-start; gap:2rem; padding:2rem 2.2rem; background:linear-gradient(135deg, rgba(255,255,255,0.03) 0%, rgba(78,205,196,0.03) 100%); border:1px solid rgba(78,205,196,0.1); border-radius:6px; transition:all 0.3s ease; backdrop-filter:blur(4px);" onmouseover="this.style.borderColor='rgba(78,205,196,0.3)'" onmouseout="this.style.borderColor='rgba(78,205,196,0.1)'">
-        <span style="font-family:'Cinzel Decorative', serif; font-size:2.5rem; color:var(--teal); opacity:0.35; line-height:1; min-width:3rem; flex-shrink:0;">05</span>
+      <div class="chapter teal reveal">
+        <span class="num">05</span>
         <div>
-          <h3 style="font-family:'Cinzel', serif; font-size:1.05rem; font-weight:600; color:var(--teal); margin-bottom:0.5rem; letter-spacing:0.05em;">Tu legado: vivir con propósito real</h3>
-          <p style="font-size:0.9rem; color:var(--white-dim); line-height:1.8;">Definirás con claridad la huella que dejarás en el universo y los pasos exactos para empezar a construir ese legado desde el momento en que termines de leer.</p>
+          <h3>Tu legado: vivir con propósito real</h3>
+          <p>Definirás con claridad la huella que dejarás en el universo y los pasos exactos para empezar a construir ese legado desde el momento en que termines de leer.</p>
         </div>
       </div>
 
+    </div>
+
+    <!-- CTA intermedio -->
+    <div class="reveal" style="text-align:center; margin-top:3.5rem;">
+      <!-- ENLACE-COMPRA -->
+      <a href="https://pay.hotmart.com/L97972781G?bid=1785874653201" class="cta-btn" rel="noopener">
+        ✦ &nbsp; Empezar por 10,99€ &nbsp; ✦
+      </a>
+      <p style="margin-top:1rem; font-size:0.65rem; color:var(--white-faint); letter-spacing:0.18em; text-transform:uppercase;">
+        Antes 19,99€ · Descarga inmediata
+      </p>
     </div>
   </div>
 </section>
 
 <!-- ============================================================
-  SECCIÓN 5 — PARA QUIÉN ES / EXCLUSIVIDAD
-  Pegar como bloque HTML personalizado
+  SECCIÓN 5 — PARA QUIÉN ES
 ============================================================ -->
 <section class="cosmic-section" style="background:linear-gradient(180deg, transparent 0%, rgba(5,2,20,0.8) 50%, transparent 100%);">
   <div class="container">
     <span class="eyebrow reveal">Este libro no es para todos</span>
     <h2 class="section-heading reveal">Es para los que están<br><em>realmente listos</em></h2>
 
-    <div style="display:grid; grid-template-columns:1fr 1fr; gap:2.5rem; margin-top:3rem;">
+    <div class="grid-two" style="margin-top:3rem;">
 
-      <!-- Para quién SÍ -->
       <div class="reveal" style="background:linear-gradient(135deg, rgba(212,168,67,0.06) 0%, rgba(78,205,196,0.03) 100%); border:1px solid rgba(212,168,67,0.2); border-radius:8px; padding:2.5rem 2rem;">
         <h3 style="font-family:'Cinzel', serif; font-size:0.9rem; color:var(--gold-bright); letter-spacing:0.15em; text-transform:uppercase; margin-bottom:1.8rem; display:flex; align-items:center; gap:0.8rem;">
           <span style="display:inline-block; width:20px; height:1px; background:var(--gold);"></span>
           Es para ti si…
         </h3>
-        <ul style="list-style:none; display:flex; flex-direction:column; gap:1rem;">
-          <li style="display:flex; align-items:flex-start; gap:0.8rem; font-size:0.88rem; color:var(--white-dim); line-height:1.6;"><span style="color:var(--gold); flex-shrink:0; margin-top:0.2rem;">✦</span>Sientes que tienes una misión que aún no has activado del todo</li>
-          <li style="display:flex; align-items:flex-start; gap:0.8rem; font-size:0.88rem; color:var(--white-dim); line-height:1.6;"><span style="color:var(--gold); flex-shrink:0; margin-top:0.2rem;">✦</span>Has pasado por pruebas que te transformaron y quieres entender su propósito</li>
-          <li style="display:flex; align-items:flex-start; gap:0.8rem; font-size:0.88rem; color:var(--white-dim); line-height:1.6;"><span style="color:var(--gold); flex-shrink:0; margin-top:0.2rem;">✦</span>Buscas unir lo espiritual con resultados concretos en tu vida real</li>
-          <li style="display:flex; align-items:flex-start; gap:0.8rem; font-size:0.88rem; color:var(--white-dim); line-height:1.6;"><span style="color:var(--gold); flex-shrink:0; margin-top:0.2rem;">✦</span>Estás cansado de la espiritualidad superficial sin herramientas reales</li>
-          <li style="display:flex; align-items:flex-start; gap:0.8rem; font-size:0.88rem; color:var(--white-dim); line-height:1.6;"><span style="color:var(--gold); flex-shrink:0; margin-top:0.2rem;">✦</span>Estás dispuesto a actuar, no solo a leer y reflexionar</li>
+        <ul class="check-list">
+          <li><span>✦</span>Sientes que tienes una misión que aún no has activado del todo</li>
+          <li><span>✦</span>Has pasado por pruebas que te transformaron y quieres entender su propósito</li>
+          <li><span>✦</span>Buscas unir lo espiritual con resultados concretos en tu vida real</li>
+          <li><span>✦</span>Estás cansado de la espiritualidad superficial sin herramientas reales</li>
+          <li><span>✦</span>Estás dispuesto a actuar, no solo a leer y reflexionar</li>
         </ul>
       </div>
 
-      <!-- Para quién NO -->
       <div class="reveal" style="background:rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.07); border-radius:8px; padding:2.5rem 2rem;">
         <h3 style="font-family:'Cinzel', serif; font-size:0.9rem; color:rgba(255,255,255,0.3); letter-spacing:0.15em; text-transform:uppercase; margin-bottom:1.8rem; display:flex; align-items:center; gap:0.8rem;">
           <span style="display:inline-block; width:20px; height:1px; background:rgba(255,255,255,0.2);"></span>
           No es para ti si…
         </h3>
-        <ul style="list-style:none; display:flex; flex-direction:column; gap:1rem;">
-          <li style="display:flex; align-items:flex-start; gap:0.8rem; font-size:0.88rem; color:rgba(255,255,255,0.3); line-height:1.6;"><span style="flex-shrink:0; margin-top:0.2rem;">✗</span>Buscas resultados sin esfuerzo ni compromiso</li>
-          <li style="display:flex; align-items:flex-start; gap:0.8rem; font-size:0.88rem; color:rgba(255,255,255,0.3); line-height:1.6;"><span style="flex-shrink:0; margin-top:0.2rem;">✗</span>Prefieres permanecer en tu zona de confort</li>
-          <li style="display:flex; align-items:flex-start; gap:0.8rem; font-size:0.88rem; color:rgba(255,255,255,0.3); line-height:1.6;"><span style="flex-shrink:0; margin-top:0.2rem;">✗</span>No crees que tienes algo único que ofrecer al mundo</li>
-          <li style="display:flex; align-items:flex-start; gap:0.8rem; font-size:0.88rem; color:rgba(255,255,255,0.3); line-height:1.6;"><span style="flex-shrink:0; margin-top:0.2rem;">✗</span>Solo quieres leer sin comprometerte a cambiar nada</li>
+        <ul class="check-list muted">
+          <li><span>✗</span>Buscas resultados sin esfuerzo ni compromiso</li>
+          <li><span>✗</span>Prefieres permanecer en tu zona de confort</li>
+          <li><span>✗</span>No crees que tienes algo único que ofrecer al mundo</li>
+          <li><span>✗</span>Solo quieres leer sin comprometerte a cambiar nada</li>
         </ul>
       </div>
 
@@ -581,26 +892,85 @@ h2.section-heading em {
 </section>
 
 <!-- ============================================================
-  SECCIÓN 6 — CTA FINAL ÉPICO
-  Pegar como bloque HTML personalizado
+  SECCIÓN 6 — GARANTÍA
 ============================================================ -->
-<section class="cosmic-section" style="background:linear-gradient(180deg, transparent 0%, rgba(8,3,25,0.9) 30%, rgba(5,2,15,0.95) 70%, rgba(3,4,15,1) 100%); text-align:center; padding-bottom:8rem;">
+<section class="cosmic-section" style="padding-top:3rem; padding-bottom:3rem;">
+  <div class="container">
+    <div class="guarantee reveal">
+      <div class="seal" aria-hidden="true">
+        <b>7</b>
+        <small>días</small>
+      </div>
+      <div>
+        <h3>Sin riesgo para ti</h3>
+        <p>Si al leerlo sientes que este camino no es el tuyo, escribes a Hotmart dentro de los 7 días siguientes a la compra y te devuelven el importe íntegro. Sin preguntas, sin justificaciones. El riesgo lo asumo yo, no tú.</p>
+      </div>
+    </div>
+  </div>
+</section>
 
-  <!-- Glow épico central -->
-  <div style="position:absolute; top:30%; left:50%; transform:translate(-50%,-50%); width:700px; height:500px; background:radial-gradient(ellipse, rgba(212,168,67,0.1) 0%, rgba(78,205,196,0.05) 40%, transparent 70%); pointer-events:none; z-index:0; animation:cosmicPulse 6s ease-in-out infinite;"></div>
+<!-- ============================================================
+  SECCIÓN 7 — PREGUNTAS FRECUENTES
+============================================================ -->
+<section class="cosmic-section" style="background:linear-gradient(180deg, transparent 0%, rgba(10,4,30,0.6) 50%, transparent 100%);">
+  <div class="container" style="max-width:760px;">
+    <span class="eyebrow reveal">Antes de dar el paso</span>
+    <h2 class="section-heading reveal">Preguntas <em>frecuentes</em></h2>
+
+    <div class="faq reveal" style="margin-top:2.5rem;">
+
+      <details>
+        <summary>¿Cómo recibo el libro?</summary>
+        <p>Al completar el pago recibes un correo con el acceso inmediato. Puedes descargarlo en PDF y leerlo en el móvil, la tablet, el ordenador o tu lector de ebooks. No hay envío físico ni esperas.</p>
+      </details>
+
+      <details>
+        <summary>¿El pago es único o una suscripción?</summary>
+        <p>Pago único de 10,99€. No hay cuotas mensuales, ni renovaciones automáticas, ni cargos posteriores. Pagas una vez y el libro es tuyo para siempre.</p>
+      </details>
+
+      <details>
+        <summary>¿Hasta cuándo dura el precio de oferta?</summary>
+        <p>Es un precio de lanzamiento. Se mantiene mientras dure esta etapa y volverá a 19,99€ sin aviso previo. Si estás leyendo esto y el precio sigue ahí, todavía estás a tiempo.</p>
+      </details>
+
+      <details>
+        <summary>¿Necesito conocimientos previos de espiritualidad?</summary>
+        <p>Ninguno. El libro empieza desde cero y avanza por capas. Si ya llevas años en el camino, encontrarás las herramientas prácticas que suelen faltar en los textos más teóricos.</p>
+      </details>
+
+      <details>
+        <summary>¿Es seguro pagar aquí?</summary>
+        <p>La compra se procesa íntegramente en Hotmart, una de las mayores plataformas de productos digitales del mundo, con conexión cifrada. Tus datos de pago nunca pasan por esta página.</p>
+      </details>
+
+      <details>
+        <summary>¿Y si no es para mí?</summary>
+        <p>Tienes 7 días para pedir la devolución completa a través de Hotmart. Recuperas tu dinero íntegro.</p>
+      </details>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+  SECCIÓN 8 — CTA FINAL
+============================================================ -->
+<section class="cosmic-section" style="background:linear-gradient(180deg, transparent 0%, rgba(8,3,25,0.9) 30%, rgba(5,2,15,0.95) 70%, rgba(3,4,15,1) 100%); text-align:center; padding-bottom:7rem;">
+
+  <div style="position:absolute; top:30%; left:50%; transform:translate(-50%,-50%); width:700px; max-width:130vw; height:500px; background:radial-gradient(ellipse, rgba(212,168,67,0.1) 0%, rgba(78,205,196,0.05) 40%, transparent 70%); pointer-events:none; z-index:0; animation:cosmicPulse 6s ease-in-out infinite;" aria-hidden="true"></div>
 
   <div class="container" style="position:relative; z-index:1;">
 
     <span class="eyebrow reveal">Tu momento ha llegado</span>
 
-    <!-- Dramatic title -->
-    <h2 class="reveal" style="font-family:'Cinzel Decorative', serif; font-weight:400; font-size:clamp(2rem, 6vw, 4.5rem); line-height:1.1; text-align:center; background:linear-gradient(180deg, #ffffff 0%, var(--gold-bright) 60%, var(--gold) 100%); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; margin-bottom:1.5rem; filter:drop-shadow(0 0 40px rgba(212,168,67,0.3));">
+    <h2 class="dramatic-title gold-text reveal">
       ¿Seguirás ignorando<br>el llamado del universo?
     </h2>
 
     <p class="body-text reveal" style="font-size:1.05rem; margin-bottom:1rem;">
-      Cada día que pasa sin actuar, la voz se hace más difícil de escuchar. 
-      Las señales se acumulan. El tiempo avanza. 
+      Cada día que pasa sin actuar, la voz se hace más difícil de escuchar.
+      Las señales se acumulan. El tiempo avanza.
     </p>
     <p class="body-text reveal" style="font-style:italic; color:var(--gold-bright);">
       Este conocimiento está frente a ti ahora. Lo que hagas con él es tu elección.
@@ -608,49 +978,47 @@ h2.section-heading em {
 
     <div class="star-divider reveal"><span>✦ ✦ ✦</span></div>
 
-    <!-- Price box -->
-    <div class="reveal" style="display:inline-flex; flex-direction:column; align-items:center; background:linear-gradient(135deg, rgba(212,168,67,0.08) 0%, rgba(78,205,196,0.04) 100%); border:1px solid rgba(212,168,67,0.3); border-radius:8px; padding:2.5rem 4rem; margin-bottom:2.5rem; backdrop-filter:blur(8px); position:relative; overflow:hidden;">
+    <!-- Caja de precio -->
+    <div class="reveal price-box price-block" style="display:inline-flex; flex-direction:column; align-items:center; background:linear-gradient(135deg, rgba(212,168,67,0.08) 0%, rgba(78,205,196,0.04) 100%); border:1px solid rgba(212,168,67,0.3); border-radius:10px; padding:2.5rem 3.5rem; margin-bottom:2.5rem; backdrop-filter:blur(8px); position:relative; overflow:hidden;">
       <div style="position:absolute; top:0; left:0; right:0; height:1px; background:linear-gradient(to right, transparent, var(--gold-bright), transparent);"></div>
 
-      <!-- Oferta badge -->
-      <div style="background:linear-gradient(135deg, #e63946, #c1121f); color:#fff; font-family:'Cinzel', serif; font-size:0.62rem; font-weight:600; letter-spacing:0.25em; text-transform:uppercase; padding:0.4rem 1.4rem; border-radius:2px; margin-bottom:1.2rem; box-shadow:0 0 20px rgba(230,57,70,0.5); animation:ofertaPulse 2s ease-in-out infinite;">⚡ Oferta por Tiempo Limitado ⚡</div>
+      <div class="offer-badge" style="margin-bottom:1.2rem;">⚡ Oferta de lanzamiento ⚡</div>
 
-      <span style="font-family:'Raleway'; font-size:0.6rem; letter-spacing:0.4em; text-transform:uppercase; color:var(--white-faint); margin-bottom:0.3rem;">Acceso completo · Descarga inmediata</span>
+      <span style="font-size:0.6rem; letter-spacing:0.35em; text-transform:uppercase; color:var(--white-faint); margin-bottom:0.7rem; text-indent:0.35em;">Acceso completo · Descarga inmediata</span>
 
-      <!-- Precio tachado -->
-      <div style="font-family:'Raleway'; font-size:1.3rem; color:rgba(255,255,255,0.3); text-decoration:line-through; margin-bottom:0.1rem;">10,99€</div>
-
-      <!-- Precio oferta -->
-      <div style="font-family:'Cinzel Decorative', serif; font-size:5rem; font-weight:400; color:#fff; line-height:1; filter:drop-shadow(0 0 30px rgba(212,168,67,0.5)); margin:0.2rem 0;">
-        <span style="font-size:2.2rem; vertical-align:super;">€</span>4,99
+      <div class="price-row">
+        <span class="price-old">19,99€</span>
+        <span class="discount-tag">−45%</span>
       </div>
 
-      <span style="font-family:'Cinzel', serif; font-size:0.7rem; color:var(--gold); letter-spacing:0.15em;">Pago único · Sin suscripción · Ahorras 6€</span>
+      <div class="price-new" style="margin:0.2rem 0;"><span class="cur">€</span>10,99</div>
+
+      <span class="price-note">Pago único · Sin suscripción · Ahorras 9€</span>
 
       <div style="position:absolute; bottom:0; left:0; right:0; height:1px; background:linear-gradient(to right, transparent, var(--gold-bright), transparent);"></div>
     </div>
 
     <br>
 
-    <a href="https://pay.hotmart.com/L97972781G?off=q63b5zfg" class="cta-btn reveal" style="font-size:0.85rem; padding:1.4rem 5rem;">
-      ✦ &nbsp; SÍ, QUIERO DESPERTAR MI PODER &nbsp; ✦
+    <!-- ENLACE-COMPRA -->
+    <a href="https://pay.hotmart.com/L97972781G?bid=1785874653201" class="cta-btn large reveal" rel="noopener">
+      ✦ &nbsp; Sí, quiero despertar mi poder &nbsp; ✦
     </a>
 
-    <!-- Security row -->
-    <div class="reveal" style="display:flex; align-items:center; justify-content:center; gap:2.5rem; margin-top:2rem; flex-wrap:wrap;">
-      <span style="display:flex; align-items:center; gap:0.5rem; font-size:0.65rem; color:var(--white-faint); letter-spacing:0.15em; text-transform:uppercase;">
-        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-        Pago Seguro
+    <div class="trust-row reveal">
+      <span>
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+        Pago seguro
       </span>
-      <span style="color:rgba(212,168,67,0.3); font-size:0.5rem;">✦</span>
-      <span style="display:flex; align-items:center; gap:0.5rem; font-size:0.65rem; color:var(--white-faint); letter-spacing:0.15em; text-transform:uppercase;">
-        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
-        Hotmart Certificado
+      <span class="sep" style="color:rgba(212,168,67,0.3); font-size:0.5rem;">✦</span>
+      <span>
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+        Garantía de 7 días
       </span>
-      <span style="color:rgba(212,168,67,0.3); font-size:0.5rem;">✦</span>
-      <span style="display:flex; align-items:center; gap:0.5rem; font-size:0.65rem; color:var(--white-faint); letter-spacing:0.15em; text-transform:uppercase;">
-        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-        Acceso Instantáneo
+      <span class="sep" style="color:rgba(212,168,67,0.3); font-size:0.5rem;">✦</span>
+      <span>
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        Acceso instantáneo
       </span>
     </div>
 
@@ -663,149 +1031,200 @@ h2.section-heading em {
   </div>
 </section>
 
-<!-- Footer -->
-<footer style="background:#03040f; padding:2.5rem; text-align:center; border-top:1px solid rgba(212,168,67,0.1); position:relative; z-index:1;">
-  <p style="font-size:0.65rem; color:rgba(255,255,255,0.2); letter-spacing:0.15em; text-transform:uppercase;">
-    © 2025 El Camino del Elegido · Todos los derechos reservados
+<footer style="background:#03040f; padding:2.5rem 1.5rem; text-align:center; border-top:1px solid rgba(212,168,67,0.1); position:relative; z-index:1;">
+  <p style="font-size:0.65rem; color:rgba(255,255,255,0.22); letter-spacing:0.15em; text-transform:uppercase; line-height:2;">
+    © 2026 El Camino del Elegido · Todos los derechos reservados<br>
+    Venta procesada por Hotmart
   </p>
 </footer>
 
-<!-- ============================================================
-  SECCIÓN 7 — SCRIPTS (pegar al final de la última sección)
-============================================================ -->
+<!-- Barra fija -->
 <div class="sticky-bar" id="stickyBar">
-  <p>El Camino del Elegido — €10,99</p>
-  <a href="https://pay.hotmart.com/L97972781G?off=q63b5zfg" class="sticky-cta">✦ Obtener Acceso Ahora</a>
+  <p>El Camino del Elegido — <s>19,99€</s> <b>10,99€</b></p>
+  <!-- ENLACE-COMPRA -->
+  <a href="https://pay.hotmart.com/L97972781G?bid=1785874653201" class="sticky-cta" rel="noopener">✦ Obtener acceso</a>
 </div>
 
-<style>
-@keyframes ofertaPulse {
-  0%, 100% { box-shadow: 0 0 20px rgba(230,57,70,0.5); }
-  50% { box-shadow: 0 0 35px rgba(230,57,70,0.8), 0 0 60px rgba(230,57,70,0.3); }
-}
-@keyframes cosmicPulse {
-  0%, 100% { transform: scale(1); opacity: 0.8; }
-  50% { transform: scale(1.08); opacity: 1; }
-}
-@keyframes scrollBounce {
-  0%, 100% { transform: translateX(-50%) translateY(0); opacity: 0.6; }
-  50% { transform: translateX(-50%) translateY(6px); opacity: 1; }
-}
-@keyframes shootingStar {
-  0% { transform: translateX(-200px) translateY(-100px); opacity: 1; }
-  100% { transform: translateX(800px) translateY(400px); opacity: 0; }
-}
-</style>
-
 <script>
-// ===== STAR FIELD =====
-const canvas = document.getElementById('starCanvas');
-const ctx = canvas.getContext('2d');
-let stars = [], shootingStars = [], W, H;
+(function () {
+  var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-function resize() {
-  W = canvas.width = window.innerWidth;
-  H = canvas.height = window.innerHeight;
-}
+  /* ===== CAMPO DE ESTRELLAS ===== */
+  var canvas = document.getElementById('starCanvas');
+  var ctx = canvas.getContext('2d');
+  var stars = [], shootingStars = [], W, H, running = true, rafId = null;
 
-function createStars() {
-  stars = [];
-  for (let i = 0; i < 280; i++) {
-    stars.push({
-      x: Math.random() * W,
-      y: Math.random() * H,
-      r: Math.random() * 1.5 + 0.2,
-      alpha: Math.random() * 0.8 + 0.1,
-      speed: Math.random() * 0.4 + 0.1,
-      twinkleSpeed: Math.random() * 0.02 + 0.005,
-      twinkleDir: Math.random() > 0.5 ? 1 : -1,
-      gold: Math.random() > 0.85
-    });
+  function starCount() {
+    var w = window.innerWidth;
+    if (w < 600) return 110;
+    if (w < 1100) return 190;
+    return 280;
   }
-}
 
-function spawnShootingStar() {
-  if (Math.random() > 0.994) {
-    shootingStars.push({
-      x: Math.random() * W * 0.7,
-      y: Math.random() * H * 0.4,
-      len: Math.random() * 100 + 60,
-      speed: Math.random() * 8 + 6,
-      alpha: 1,
-      angle: Math.PI / 4 + (Math.random() - 0.5) * 0.3
-    });
+  function resize() {
+    W = canvas.width = window.innerWidth;
+    H = canvas.height = window.innerHeight;
   }
-}
 
-function drawFrame() {
-  ctx.clearRect(0, 0, W, H);
+  function createStars() {
+    stars = [];
+    var n = starCount();
+    for (var i = 0; i < n; i++) {
+      stars.push({
+        x: Math.random() * W,
+        y: Math.random() * H,
+        r: Math.random() * 1.5 + 0.2,
+        alpha: Math.random() * 0.8 + 0.1,
+        twinkleSpeed: Math.random() * 0.02 + 0.005,
+        twinkleDir: Math.random() > 0.5 ? 1 : -1,
+        gold: Math.random() > 0.85
+      });
+    }
+  }
 
-  // Stars
-  stars.forEach(s => {
-    s.alpha += s.twinkleSpeed * s.twinkleDir;
-    if (s.alpha > 1 || s.alpha < 0.05) s.twinkleDir *= -1;
+  function spawnShootingStar() {
+    if (Math.random() > 0.994) {
+      shootingStars.push({
+        x: Math.random() * W * 0.7,
+        y: Math.random() * H * 0.4,
+        len: Math.random() * 100 + 60,
+        speed: Math.random() * 8 + 6,
+        alpha: 1,
+        angle: Math.PI / 4 + (Math.random() - 0.5) * 0.3
+      });
+    }
+  }
 
-    ctx.beginPath();
-    ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
-    const color = s.gold ? `rgba(240,200,100,${s.alpha})` : `rgba(200,210,255,${s.alpha})`;
-    ctx.fillStyle = color;
-    ctx.fill();
+  function drawFrame() {
+    ctx.clearRect(0, 0, W, H);
 
-    if (s.r > 1.1) {
+    for (var i = 0; i < stars.length; i++) {
+      var s = stars[i];
+      s.alpha += s.twinkleSpeed * s.twinkleDir;
+      if (s.alpha > 1 || s.alpha < 0.05) s.twinkleDir *= -1;
+
       ctx.beginPath();
-      ctx.arc(s.x, s.y, s.r * 2.5, 0, Math.PI * 2);
-      const glow = s.gold ? `rgba(212,168,67,${s.alpha * 0.15})` : `rgba(180,190,255,${s.alpha * 0.1})`;
-      ctx.fillStyle = glow;
+      ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+      ctx.fillStyle = s.gold ? 'rgba(240,200,100,' + s.alpha + ')' : 'rgba(200,210,255,' + s.alpha + ')';
       ctx.fill();
+
+      if (s.r > 1.1) {
+        ctx.beginPath();
+        ctx.arc(s.x, s.y, s.r * 2.5, 0, Math.PI * 2);
+        ctx.fillStyle = s.gold
+          ? 'rgba(212,168,67,' + (s.alpha * 0.15) + ')'
+          : 'rgba(180,190,255,' + (s.alpha * 0.1) + ')';
+        ctx.fill();
+      }
+    }
+
+    spawnShootingStar();
+    shootingStars = shootingStars.filter(function (ss) { return ss.alpha > 0.01; });
+    shootingStars.forEach(function (ss) {
+      var tailX = ss.x - Math.cos(ss.angle) * ss.len;
+      var tailY = ss.y - Math.sin(ss.angle) * ss.len;
+      var grad = ctx.createLinearGradient(tailX, tailY, ss.x, ss.y);
+      grad.addColorStop(0, 'rgba(255,255,255,0)');
+      grad.addColorStop(1, 'rgba(240,200,120,' + ss.alpha + ')');
+      ctx.beginPath();
+      ctx.moveTo(tailX, tailY);
+      ctx.lineTo(ss.x, ss.y);
+      ctx.strokeStyle = grad;
+      ctx.lineWidth = 1.5;
+      ctx.stroke();
+      ss.x += Math.cos(ss.angle) * ss.speed;
+      ss.y += Math.sin(ss.angle) * ss.speed;
+      ss.alpha -= 0.018;
+    });
+
+    if (running) rafId = requestAnimationFrame(drawFrame);
+  }
+
+  function drawStatic() {
+    ctx.clearRect(0, 0, W, H);
+    stars.forEach(function (s) {
+      ctx.beginPath();
+      ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+      ctx.fillStyle = s.gold ? 'rgba(240,200,100,0.7)' : 'rgba(200,210,255,0.6)';
+      ctx.fill();
+    });
+  }
+
+  resize();
+  createStars();
+  if (reduced) { drawStatic(); } else { drawFrame(); }
+
+  var resizeTimer;
+  window.addEventListener('resize', function () {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(function () {
+      resize();
+      createStars();
+      if (reduced) drawStatic();
+    }, 150);
+  });
+
+  // Pausa la animación cuando la pestaña no está visible (ahorra batería)
+  document.addEventListener('visibilitychange', function () {
+    if (reduced) return;
+    if (document.hidden) {
+      running = false;
+      if (rafId) cancelAnimationFrame(rafId);
+    } else if (!running) {
+      running = true;
+      drawFrame();
     }
   });
 
-  // Shooting stars
-  spawnShootingStar();
-  shootingStars = shootingStars.filter(ss => ss.alpha > 0.01);
-  shootingStars.forEach(ss => {
-    const tailX = ss.x - Math.cos(ss.angle) * ss.len;
-    const tailY = ss.y - Math.sin(ss.angle) * ss.len;
-    const grad = ctx.createLinearGradient(tailX, tailY, ss.x, ss.y);
-    grad.addColorStop(0, 'rgba(255,255,255,0)');
-    grad.addColorStop(1, `rgba(240,200,120,${ss.alpha})`);
-    ctx.beginPath();
-    ctx.moveTo(tailX, tailY);
-    ctx.lineTo(ss.x, ss.y);
-    ctx.strokeStyle = grad;
-    ctx.lineWidth = 1.5;
-    ctx.stroke();
-    ss.x += Math.cos(ss.angle) * ss.speed;
-    ss.y += Math.sin(ss.angle) * ss.speed;
-    ss.alpha -= 0.018;
+  /* ===== REVELADO AL HACER SCROLL ===== */
+  var revealEls = document.querySelectorAll('.reveal');
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e, i) {
+        if (e.isIntersecting) {
+          setTimeout(function () { e.target.classList.add('visible'); }, i * 90);
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.08 });
+    revealEls.forEach(function (el) { io.observe(el); });
+  } else {
+    revealEls.forEach(function (el) { el.classList.add('visible'); });
+  }
+
+  /* ===== BARRA FIJA ===== */
+  var heroEl = document.getElementById('hero');
+  var stickyBar = document.getElementById('stickyBar');
+  if ('IntersectionObserver' in window && heroEl) {
+    new IntersectionObserver(function (entries) {
+      stickyBar.classList.toggle('show', !entries[0].isIntersecting);
+    }, { threshold: 0 }).observe(heroEl);
+  }
+
+  /* ===== BARRA DE PROGRESO ===== */
+  var progressBar = document.getElementById('progressBar');
+  var ticking = false;
+  window.addEventListener('scroll', function () {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(function () {
+      var h = document.documentElement.scrollHeight - window.innerHeight;
+      var pct = h > 0 ? (window.scrollY / h) * 100 : 0;
+      progressBar.style.width = pct + '%';
+      ticking = false;
+    });
+  }, { passive: true });
+
+  /* ===== FAQ: sólo una abierta a la vez ===== */
+  var faqItems = document.querySelectorAll('.faq details');
+  faqItems.forEach(function (item) {
+    item.addEventListener('toggle', function () {
+      if (item.open) {
+        faqItems.forEach(function (other) { if (other !== item) other.open = false; });
+      }
+    });
   });
-
-  requestAnimationFrame(drawFrame);
-}
-
-resize();
-createStars();
-drawFrame();
-window.addEventListener('resize', () => { resize(); createStars(); });
-
-// ===== REVEAL ON SCROLL =====
-const revealEls = document.querySelectorAll('.reveal');
-const io = new IntersectionObserver((entries) => {
-  entries.forEach((e, i) => {
-    if (e.isIntersecting) {
-      setTimeout(() => e.target.classList.add('visible'), i * 100);
-      io.unobserve(e.target);
-    }
-  });
-}, { threshold: 0.08 });
-revealEls.forEach(el => io.observe(el));
-
-// ===== STICKY BAR =====
-const heroEl = document.getElementById('hero');
-const stickyBar = document.getElementById('stickyBar');
-new IntersectionObserver(entries => {
-  stickyBar.classList.toggle('show', !entries[0].isIntersecting);
-}, { threshold: 0 }).observe(heroEl);
+})();
 </script>
 
 </body>
